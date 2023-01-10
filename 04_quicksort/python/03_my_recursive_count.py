@@ -1,8 +1,7 @@
 def recursive_count(arr):
-    if not arr:
+    if arr == []:
         return 0
-    else:
-        return recursive_count(arr[1:]) + 1
+    return 1 + recursive_count(arr[1:])
 
 
-print(recursive_count([1, 2, 3, 4]))
+print(recursive_count([1, 2, 4]))
