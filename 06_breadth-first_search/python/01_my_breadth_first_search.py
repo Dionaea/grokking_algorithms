@@ -1,36 +1,36 @@
 from collections import deque
 
 
-graph = {}
-graph["you"] = ["alice", "bob", "claire"]
-graph["bob"] = ["anuj", "peggy"]
-graph["alice"] = ["peggy"]
-graph["claire"] = ["thom", "jonny"]
+graph = dict()
+graph['you'] = ['alice', 'clair', 'bob']
+graph['alice'] = ['peggy']
+graph['clair'] = ['tom', 'johny']
+graph['bob'] = ['peggy', 'anuj']
 graph["anuj"] = []
 graph["peggy"] = []
 graph["thom"] = []
 graph["jonny"] = []
 
 
-def person_is_seller(person):
-    if person == 'peggy':
+def is_mango_seller(name):
+    if name[-1] == 'm':
         return True
-    else:
-        return False
-
-
-def bf_search(name):
-    not_sellers = set()
-    search_queue = deque(graph[name])
-    while search_queue:
-        person = search_queue.popleft()
-        if person not in not_sellers:
-            if person_is_seller(person):
-                return person
-            else:
-                search_queue.extend(graph[person])
-                not_sellers.add(person)
     return False
 
 
-print(bf_search("you"))
+def search(name):
+    search_queue = deque()
+    search_queue += graph[name]
+    checked_people = set()
+    while search_queue:
+        person = search_queue.popleft()
+        if person not in checked_people:
+            if is_mango_seller(person):
+                return person
+            else:
+                search_queue += graph[person]
+        else:
+            checked_people.add(checked_people)
+
+
+search("you")
